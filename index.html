@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, viewport-fit=cover">
+<title>Chennai Fresh Catch · Billing</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,500&family=Work+Sans:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- ============ TOP HEADER ============ -->
+<header class="topbar">
+  <div class="brand">
+    <svg class="brand-mark" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      <path d="M4 28c6-10 14-15 20-15s10 3 10 3-3 6-10 9c6 1 12 5 14 9 0 0-8 4-18 2C12 34 6 32 4 28Z" fill="var(--seafoam)"/>
+      <circle cx="30" cy="20" r="2.2" fill="var(--ocean-deep)"/>
+      <path d="M2 30c2-1 4-1 6 0" stroke="var(--ocean-deep)" stroke-width="1.6" stroke-linecap="round"/>
+    </svg>
+    <div class="brand-text">
+      <h1>Chennai Fresh Catch</h1>
+      <p>Fresh meat &amp; seafood, weighed &amp; billed here</p>
+    </div>
+  </div>
+  <nav class="tabs" id="topTabs">
+    <button class="tab-btn active" data-view="billing">
+      <svg viewBox="0 0 24 24"><path d="M3 6h18M3 12h18M3 18h12" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+      Billing
+    </button>
+    <button class="tab-btn" data-view="menu">
+      <svg viewBox="0 0 24 24"><path d="M4 4h16v16H4z" stroke="currentColor" stroke-width="1.6"/><path d="M4 9h16M9 9v11" stroke="currentColor" stroke-width="1.6"/></svg>
+      Manage Menu
+    </button>
+    <button class="tab-btn" data-view="report">
+      <svg viewBox="0 0 24 24"><path d="M5 19V9M12 19V5M19 19v-6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+      Sales Report
+    </button>
+  </nav>
+</header>
+
+<svg class="wave-divider" viewBox="0 0 1200 24" preserveAspectRatio="none" aria-hidden="true">
+  <path d="M0 12 Q 50 0 100 12 T 200 12 T 300 12 T 400 12 T 500 12 T 600 12 T 700 12 T 800 12 T 900 12 T 1000 12 T 1100 12 T 1200 12 V24 H0 Z" fill="var(--ocean-deep)"/>
+</svg>
+
+<main id="app">
+
+  <!-- ============ BILLING VIEW ============ -->
+  <section class="view" id="view-billing">
+    <div class="billing-layout">
+      <div class="catalog">
+        <div class="chip-row" id="categoryChips">
+          <button class="chip active" data-cat="all">All</button>
+          <button class="chip" data-cat="Chicken">🐔 Chicken</button>
+          <button class="chip" data-cat="Mutton">🐐 Mutton</button>
+          <button class="chip" data-cat="Sea Fish">🐟 Sea Fish</button>
+          <button class="chip" data-cat="Fresh Water Fish">🐠 Fresh Water Fish</button>
+          <button class="chip" data-cat="Prawns">🦐 Prawns</button>
+          <button class="chip" data-cat="Crabs">🦀 Crabs</button>
+          <button class="chip" data-cat="Squids">🦑 Squids</button>
+          <button class="chip" data-cat="Special Meat">🍗 Special Meat</button>
+        </div>
+        <div class="item-grid" id="itemGrid"><!-- items injected --></div>
+      </div>
+
+      <aside class="cart-panel" id="cartPanel">
+        <div class="cart-head">
+          <h2>Current Bill</h2>
+          <span class="cart-count" id="cartCount">0 items</span>
+        </div>
+        <div class="cart-lines" id="cartLines">
+          <p class="cart-empty" id="cartEmptyMsg">Tap any catch above to add it to the bill.</p>
+        </div>
+        <div class="cart-totals">
+          <div class="row"><span>Subtotal</span><span id="cartSubtotal">₹0.00</span></div>
+          <div class="row grand"><span>Total</span><span id="cartTotal">₹0.00</span></div>
+        </div>
+        <div class="cart-actions">
+          <button class="btn btn-ghost" id="clearCartBtn">Clear Cart</button>
+          <button class="btn btn-primary" id="payNowBtn">Pay Now</button>
+        </div>
+      </aside>
+    </div>
+
+    <!-- mobile floating cart bar -->
+    <button class="mobile-cart-bar" id="mobileCartBar">
+      <span id="mobileCartText">0 items · ₹0.00</span>
+      <span class="mobile-cart-cta">View Bill →</span>
+    </button>
+  </section>
+
+  <!-- ============ MANAGE MENU VIEW ============ -->
+  <section class="view hidden" id="view-menu">
+    <div class="menu-head">
+      <div>
+        <h2>Manage Menu</h2>
+        <p class="muted">Add, edit or retire items from the catch of the day.</p>
+      </div>
+      <button class="btn btn-primary" id="addItemBtn">+ Add Item</button>
+    </div>
+    <div class="manage-table-wrap">
+      <table class="manage-table" id="manageTable">
+        <thead>
+          <tr><th></th><th>Name</th><th>Category</th><th>Price</th><th>Unit</th><th></th></tr>
+        </thead>
+        <tbody id="manageTableBody"></tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- ============ SALES REPORT VIEW ============ -->
+  <section class="view hidden" id="view-report">
+    <div class="report-head">
+      <div>
+        <h2>Monthly Sales Report</h2>
+        <p class="muted">Catch counted, cash tallied.</p>
+      </div>
+      <input type="month" id="reportMonth">
+    </div>
+
+    <div class="stat-grid">
+      <div class="stat-card">
+        <span class="stat-label">Total Sales</span>
+        <span class="stat-value" id="statTotalSales">₹0</span>
+      </div>
+      <div class="stat-card">
+        <span class="stat-label">Orders</span>
+        <span class="stat-value" id="statOrders">0</span>
+      </div>
+      <div class="stat-card">
+        <span class="stat-label">Avg. Order Value</span>
+        <span class="stat-value" id="statAvg">₹0</span>
+      </div>
+      <div class="stat-card">
+        <span class="stat-label">Top Seller</span>
+        <span class="stat-value" id="statTop">—</span>
+      </div>
+    </div>
+
+    <div class="chart-card">
+      <h3>Daily Sales</h3>
+      <div class="bar-chart" id="dailyChart"></div>
+    </div>
+
+    <div class="manage-table-wrap">
+      <table class="manage-table" id="ordersTable">
+        <thead><tr><th>Date</th><th>Bill No.</th><th>Items</th><th>Total</th></tr></thead>
+        <tbody id="ordersTableBody"></tbody>
+      </table>
+      <p class="cart-empty" id="ordersEmptyMsg" style="display:none;">No sales recorded for this month yet.</p>
+    </div>
+  </section>
+
+</main>
+
+<!-- mobile bottom nav -->
+<nav class="bottom-nav" id="bottomNav">
+  <button class="bn-btn active" data-view="billing">
+    <svg viewBox="0 0 24 24"><path d="M3 6h18M3 12h18M3 18h12" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+    <span>Billing</span>
+  </button>
+  <button class="bn-btn" data-view="menu">
+    <svg viewBox="0 0 24 24"><path d="M4 4h16v16H4z" stroke="currentColor" stroke-width="1.6"/><path d="M4 9h16M9 9v11" stroke="currentColor" stroke-width="1.6"/></svg>
+    <span>Menu</span>
+  </button>
+  <button class="bn-btn" data-view="report">
+    <svg viewBox="0 0 24 24"><path d="M5 19V9M12 19V5M19 19v-6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+    <span>Report</span>
+  </button>
+</nav>
+
+<!-- ============ ITEM ADD/EDIT MODAL ============ -->
+<div class="modal-overlay hidden" id="itemModalOverlay">
+  <div class="modal">
+    <div class="modal-head">
+      <h3 id="itemModalTitle">Add Item</h3>
+      <button class="icon-btn" id="itemModalClose">✕</button>
+    </div>
+    <form id="itemForm">
+      <input type="hidden" id="itemId">
+      <label>Item Name
+        <input type="text" id="itemName" placeholder="e.g. Pomfret" required>
+      </label>
+      <label>Category
+        <select id="itemCategory" required>
+          <option value="Chicken">Chicken</option>
+          <option value="Mutton">Mutton</option>
+          <option value="Sea Fish">Sea Fish</option>
+          <option value="Fresh Water Fish">Fresh Water Fish</option>
+          <option value="Prawns">Prawns</option>
+          <option value="Crabs">Crabs</option>
+          <option value="Squids">Squids</option>
+          <option value="Special Meat">Special Meat</option>
+        </select>
+      </label>
+      <div class="form-row">
+        <label>Price (₹)
+          <input type="number" id="itemPrice" min="0" step="1" placeholder="450" required>
+        </label>
+        <label>Unit
+          <select id="itemUnit">
+            <option value="kg">per kg</option>
+            <option value="500g">per 500g</option>
+            <option value="250g">per 250g</option>
+            <option value="piece">per piece</option>
+            <option value="pack">per pack</option>
+            <option value="plate">per plate</option>
+          </select>
+        </label>
+      </div>
+      <label>Image URL
+        <input type="url" id="itemImage" placeholder="https://...">
+      </label>
+      <img id="itemImgPreview" class="img-preview hidden" alt="preview">
+      <div class="modal-actions">
+        <button type="button" class="btn btn-ghost" id="itemDeleteBtn" style="display:none;">Delete Item</button>
+        <button type="submit" class="btn btn-primary">Save Item</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<!-- ============ PAY MODAL ============ -->
+<div class="modal-overlay hidden" id="payModalOverlay">
+  <div class="modal modal-pay">
+    <div class="modal-head">
+      <h3>Pay Now</h3>
+      <button class="icon-btn" id="payModalClose">✕</button>
+    </div>
+    <div class="pay-body">
+      <p class="pay-amount-label">Amount Due</p>
+      <p class="pay-amount" id="payAmount">₹0.00</p>
+      <div class="qr-wrap">
+        <img id="qrImage" alt="Scan to pay QR code">
+      </div>
+      <p class="qr-hint">Scan with any UPI app to pay Oma Kadal Itam. Replace the UPI ID in script.js with the shop's real one before going live.</p>
+      <div class="pay-actions">
+        <button class="btn btn-ghost" id="cancelPayBtn">Cancel</button>
+        <button class="btn btn-primary" id="confirmPayBtn">Payment Received</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ============ RECEIPT (for printing) ============ -->
+<div class="modal-overlay hidden" id="receiptOverlay">
+  <div class="modal modal-receipt">
+    <div class="modal-head no-print">
+      <h3>Bill Ready</h3>
+      <button class="icon-btn" id="receiptClose">✕</button>
+    </div>
+    <div id="receiptContent" class="receipt">
+      <!-- injected -->
+    </div>
+    <div class="modal-actions no-print">
+      <button class="btn btn-ghost" id="receiptDoneBtn">New Bill</button>
+      <button class="btn btn-primary" id="printBtn">🖨 Print Bill</button>
+    </div>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script src="script.js"></script>
+</body>
+</html>
