@@ -4,130 +4,153 @@
   /* ===================== CONFIG ===================== */
   const SHOP = {
     name: "Chennai Fresh Catch",
-    tagline: "Fresh Meat & Seafood Market & Billing Counter",
+    location: "Saidapet Market, Chennai",
+    phone: "94458 23174",
     upiId: "chennaifreshcatch@upi" // TODO: replace with the shop's real UPI ID before going live
   };
   const CURRENCY = "₹";
-  const STORAGE_MENU = "cfc_menu_v1";
-  const STORAGE_ORDERS = "cfc_orders_v1";
-  const STORAGE_BILLNO = "cfc_billno_v1";
+  const STORAGE_MENU = "cfc_menu_v2";
+  const STORAGE_ORDERS = "cfc_orders_v2";
+  const STORAGE_BILLNO = "cfc_billno_v2";
+
+  const CATEGORIES = [
+    { key: "Chicken", icon: "🐔" },
+    { key: "Mutton", icon: "🐐" },
+    { key: "Sea Fish", icon: "🐟" },
+    { key: "Fresh Water Fish", icon: "🐠" },
+    { key: "Prawns", icon: "🦐" },
+    { key: "Crabs", icon: "🦀" },
+    { key: "Squids", icon: "🦑" },
+    { key: "Special Meat", icon: "🍗" }
+  ];
+
+  const CATEGORY_FALLBACK = {
+    "Chicken": "https://images.pexels.com/photos/13376576/pexels-photo-13376576.jpeg?auto=compress&cs=tinysrgb&w=600",
+    "Mutton": "https://images.pexels.com/photos/26244103/pexels-photo-26244103.jpeg?auto=compress&cs=tinysrgb&w=600",
+    "Sea Fish": "https://images.pexels.com/photos/8352009/pexels-photo-8352009.jpeg?auto=compress&cs=tinysrgb&w=600",
+    "Fresh Water Fish": "https://images.pexels.com/photos/8352786/pexels-photo-8352786.jpeg?auto=compress&cs=tinysrgb&w=600",
+    "Crabs": "https://images.pexels.com/photos/3806139/pexels-photo-3806139.jpeg?auto=compress&cs=tinysrgb&w=600",
+    "Prawns": "https://images.pexels.com/photos/2714384/pexels-photo-2714384.jpeg?auto=compress&cs=tinysrgb&w=600",
+    "Squids": "https://images.pexels.com/photos/30648997/pexels-photo-30648997.jpeg?auto=compress&cs=tinysrgb&w=600",
+    "Special Meat": "https://images.pexels.com/photos/5847715/pexels-photo-5847715.jpeg?auto=compress&cs=tinysrgb&w=600"
+  };
 
   const DEFAULT_MENU = [
     /* ---------- CHICKEN ---------- */
-    { id: "c1", name: "Chicken Curry Cut with Skin", category: "Chicken", price: 169, unit: "500g",
+    { id: "c1", name: "Chicken Curry Cut with Skin", desc: "Bone-in curry cut, skin on", category: "Chicken", price: 169, unit: "500g",
       image: "https://images.pexels.com/photos/13376576/pexels-photo-13376576.jpeg?auto=compress&cs=tinysrgb&w=600" },
-    { id: "c2", name: "Chicken Curry Cut without Skin", category: "Chicken", price: 179, unit: "kg",
+    { id: "c2", name: "Chicken Curry Cut without Skin", desc: "Skinless curry cut, ready to cook", category: "Chicken", price: 179, originalPrice: 199, unit: "kg",
       image: "https://images.pexels.com/photos/7140318/pexels-photo-7140318.jpeg?auto=compress&cs=tinysrgb&w=600" },
-    { id: "c3", name: "Chicken Liver", category: "Chicken", price: 60, unit: "250g",
+    { id: "c3", name: "Chicken Liver", desc: "Nutritious source of iron & protein", category: "Chicken", price: 60, unit: "250g",
       image: "https://images.pexels.com/photos/13422436/pexels-photo-13422436.jpeg?auto=compress&cs=tinysrgb&w=600" },
-    { id: "c4", name: "Chicken Strips", category: "Chicken", price: 249, unit: "500g",
+    { id: "c4", name: "Chicken Strips", desc: "Boneless strips, ready to marinate", category: "Chicken", price: 249, originalPrice: 299, unit: "500g",
       image: "https://images.pexels.com/photos/6107735/pexels-photo-6107735.jpeg?auto=compress&cs=tinysrgb&w=600" },
-    { id: "c5", name: "Chicken Cubes", category: "Chicken", price: 249, unit: "500g",
+    { id: "c5", name: "Chicken Cubes", desc: "Fresh diced boneless cubes", category: "Chicken", price: 249, originalPrice: 299, unit: "500g",
       image: "https://images.pexels.com/photos/12197308/pexels-photo-12197308.jpeg?auto=compress&cs=tinysrgb&w=600" },
-    { id: "c6", name: "Chicken Breast Fillets", category: "Chicken", price: 249, unit: "500g",
+    { id: "c6", name: "Chicken Breast Fillets", desc: "Lean boneless breast fillets", category: "Chicken", price: 249, originalPrice: 299, unit: "500g",
       image: "https://images.pexels.com/photos/6107726/pexels-photo-6107726.jpeg?auto=compress&cs=tinysrgb&w=600" },
-    { id: "c7", name: "Chicken Wings", category: "Chicken", price: 159, unit: "500g",
+    { id: "c7", name: "Chicken Wings", desc: "Juicy whole wings", category: "Chicken", price: 159, originalPrice: 189, unit: "500g",
       image: "https://images.pexels.com/photos/7140306/pexels-photo-7140306.jpeg?auto=compress&cs=tinysrgb&w=600" },
 
     /* ---------- MUTTON ---------- */
-    { id: "mu1", name: "Mutton Brain", category: "Mutton", price: 299, unit: "piece",
+    { id: "mu1", name: "Mutton Brain", desc: "Rich source of protein", category: "Mutton", price: 299, unit: "piece",
       image: "https://images.pexels.com/photos/26244103/pexels-photo-26244103.jpeg?auto=compress&cs=tinysrgb&w=600" },
-    { id: "mu2", name: "Mutton Liver Chunks", category: "Mutton", price: 249, unit: "500g",
+    { id: "mu2", name: "Mutton Liver Chunks", desc: "Fresh cleaned liver chunks", category: "Mutton", price: 249, unit: "500g",
       image: "https://images.pexels.com/photos/26244103/pexels-photo-26244103.jpeg?auto=compress&cs=tinysrgb&w=600" },
-    { id: "mu3", name: "Mutton Botti (Tripe & Intestine)", category: "Mutton", price: 399, unit: "kg",
+    { id: "mu3", name: "Mutton Botti (Tripe & Intestine)", desc: "Cleaned, ready to cook", category: "Mutton", price: 399, unit: "kg",
       image: "https://images.pexels.com/photos/26244103/pexels-photo-26244103.jpeg?auto=compress&cs=tinysrgb&w=600" },
-    { id: "mu4", name: "Mutton Paaya (Leg)", category: "Mutton", price: 399, unit: "kg",
+    { id: "mu4", name: "Mutton Paaya (Leg)", desc: "Traditional trotters for paya", category: "Mutton", price: 399, unit: "kg",
       image: "https://images.pexels.com/photos/26244103/pexels-photo-26244103.jpeg?auto=compress&cs=tinysrgb&w=600" },
-    { id: "mu5", name: "Mutton Spleen (Suvarotti)", category: "Mutton", price: 399, unit: "kg",
+    { id: "mu5", name: "Mutton Spleen (Suvarotti)", desc: "Fresh cleaned spleen", category: "Mutton", price: 399, unit: "kg",
       image: "https://images.pexels.com/photos/26244103/pexels-photo-26244103.jpeg?auto=compress&cs=tinysrgb&w=600" },
-    { id: "mu6", name: "Mutton Kapura (Aatu Kottai)", category: "Mutton", price: 249, unit: "250g",
+    { id: "mu6", name: "Mutton Kapura (Aatu Kottai)", desc: "Succulent, juicy, tasty cut", category: "Mutton", price: 249, unit: "250g",
       image: "https://images.pexels.com/photos/31732110/pexels-photo-31732110.jpeg?auto=compress&cs=tinysrgb&w=600" },
-    { id: "mu7", name: "Mutton Kidney", category: "Mutton", price: 299, unit: "250g",
+    { id: "mu7", name: "Mutton Kidney", desc: "Fresh cleaned kidney", category: "Mutton", price: 299, unit: "250g",
       image: "https://images.pexels.com/photos/31732110/pexels-photo-31732110.jpeg?auto=compress&cs=tinysrgb&w=600" },
-    { id: "mu8", name: "Mutton Chops", category: "Mutton", price: 499, unit: "500g",
+    { id: "mu8", name: "Mutton Chops", desc: "Bone-in chops, curry or grill", category: "Mutton", price: 499, unit: "500g",
       image: "https://images.pexels.com/photos/31732110/pexels-photo-31732110.jpeg?auto=compress&cs=tinysrgb&w=600" },
-    { id: "mu9", name: "Mutton Curry Cut", category: "Mutton", price: 499, unit: "500g",
+    { id: "mu9", name: "Mutton Curry Cut", desc: "Classic bone-in curry cut", category: "Mutton", price: 499, unit: "500g",
       image: "https://images.pexels.com/photos/26244103/pexels-photo-26244103.jpeg?auto=compress&cs=tinysrgb&w=600" },
 
     /* ---------- SEA FISH ---------- */
-    { id: "sf1", name: "Pomfret (Vavval)", category: "Sea Fish", price: 599, unit: "500g",
+    { id: "sf1", name: "Pomfret (Vavval)", desc: "High in Omega-3 fatty acids", category: "Sea Fish", price: 599, originalPrice: 799, unit: "500g",
       image: "https://images.pexels.com/photos/8352009/pexels-photo-8352009.jpeg?auto=compress&cs=tinysrgb&w=600" },
-    { id: "sf2", name: "Tuna (Kora)", category: "Sea Fish", price: 499, unit: "kg",
+    { id: "sf2", name: "Tuna (Kora)", desc: "Especially abundant in Omega-3", category: "Sea Fish", price: 499, originalPrice: 599, unit: "kg",
       image: "https://images.pexels.com/photos/5532880/pexels-photo-5532880.jpeg?auto=compress&cs=tinysrgb&w=600" },
-    { id: "sf3", name: "Seer Fish / Vanjaram", category: "Sea Fish", price: 1199, unit: "kg",
+    { id: "sf3", name: "Seer Fish / Vanjaram", desc: "Firm, boneless steaks", category: "Sea Fish", price: 1199, originalPrice: 1300, unit: "kg",
       image: "https://images.pexels.com/photos/8351649/pexels-photo-8351649.jpeg?auto=compress&cs=tinysrgb&w=600" },
-    { id: "sf4", name: "Anchovy Fish (Nethili)", category: "Sea Fish", price: 499, unit: "kg",
+    { id: "sf4", name: "Anchovy Fish (Nethili)", desc: "Rich in poly-unsaturated fatty acids", category: "Sea Fish", price: 499, unit: "kg",
       image: "https://images.pexels.com/photos/3650159/pexels-photo-3650159.jpeg?auto=compress&cs=tinysrgb&w=600" },
-    { id: "sf5", name: "Barracuda (Sheela/Ooli)", category: "Sea Fish", price: 550, unit: "kg",
+    { id: "sf5", name: "Barracuda (Sheela/Ooli)", desc: "Firm white fish, great for frying", category: "Sea Fish", price: 550, unit: "kg",
       image: "https://images.pexels.com/photos/14879227/pexels-photo-14879227.jpeg?auto=compress&cs=tinysrgb&w=600" },
-    { id: "sf6", name: "Ray Fish (Thirukkai)", category: "Sea Fish", price: 299, unit: "kg",
+    { id: "sf6", name: "Ray Fish (Thirukkai)", desc: "Mild flavour, firm texture", category: "Sea Fish", price: 299, unit: "kg",
       image: "https://images.pexels.com/photos/229789/pexels-photo-229789.jpeg?auto=compress&cs=tinysrgb&w=600" },
-    { id: "sf7", name: "Red Snapper (Sangara Meen)", category: "Sea Fish", price: 499, unit: "kg",
+    { id: "sf7", name: "Red Snapper (Sangara Meen)", desc: "Popular for curry & fry", category: "Sea Fish", price: 499, unit: "kg",
       image: "https://images.pexels.com/photos/61153/fish-fischer-ocean-market-61153.jpeg?auto=compress&cs=tinysrgb&w=600" },
-    { id: "sf8", name: "Ayala / Bangda (Mackerel)", category: "Sea Fish", price: 399, unit: "kg",
+    { id: "sf8", name: "Ayala / Bangda (Mackerel)", desc: "Classic mackerel for fry", category: "Sea Fish", price: 399, unit: "kg",
       image: "https://images.pexels.com/photos/14879226/pexels-photo-14879226.jpeg?auto=compress&cs=tinysrgb&w=600" },
-    { id: "sf9", name: "Emperor Fish (Vilai Meen)", category: "Sea Fish", price: 599, unit: "kg",
+    { id: "sf9", name: "Emperor Fish (Vilai Meen)", desc: "Firm textured white fish", category: "Sea Fish", price: 599, unit: "kg",
       image: "https://images.pexels.com/photos/8352394/pexels-photo-8352394.jpeg?auto=compress&cs=tinysrgb&w=600" },
-    { id: "sf10", name: "Sardine (Mathi)", category: "Sea Fish", price: 299, unit: "kg",
+    { id: "sf10", name: "Sardine (Mathi)", desc: "Small, healthy & flavourful", category: "Sea Fish", price: 299, unit: "kg",
       image: "https://images.pexels.com/photos/6148977/pexels-photo-6148977.jpeg?auto=compress&cs=tinysrgb&w=600" },
-    { id: "sf11", name: "Leatherjacket Fish (Kilathi)", category: "Sea Fish", price: 499, unit: "kg",
+    { id: "sf11", name: "Leatherjacket Fish (Kilathi)", desc: "Good source of lean protein", category: "Sea Fish", price: 499, unit: "kg",
       image: "https://images.pexels.com/photos/8352050/pexels-photo-8352050.jpeg?auto=compress&cs=tinysrgb&w=600" },
-    { id: "sf12", name: "Silver Belly Fish (Karapodi)", category: "Sea Fish", price: 249, unit: "kg",
+    { id: "sf12", name: "Silver Belly Fish (Karapodi)", desc: "Small silvery fish, great for fry", category: "Sea Fish", price: 249, unit: "kg",
       image: "https://images.pexels.com/photos/15553656/pexels-photo-15553656.jpeg?auto=compress&cs=tinysrgb&w=600" },
-    { id: "sf13", name: "Cobia Fish (Kadal Viral)", category: "Sea Fish", price: 599, unit: "kg",
+    { id: "sf13", name: "Cobia Fish (Kadal Viral)", desc: "Healthy fish, rich flavour", category: "Sea Fish", price: 599, unit: "kg",
       image: "https://images.pexels.com/photos/2042564/pexels-photo-2042564.jpeg?auto=compress&cs=tinysrgb&w=600" },
-    { id: "sf14", name: "Kilanga Meen (Lady Fish)", category: "Sea Fish", price: 599, unit: "kg",
+    { id: "sf14", name: "Kilanga Meen (Lady Fish)", desc: "Soft-boned, easy to cook", category: "Sea Fish", price: 599, unit: "kg",
       image: "https://images.pexels.com/photos/8352344/pexels-photo-8352344.jpeg?auto=compress&cs=tinysrgb&w=600" },
-    { id: "sf15", name: "Seabass (Koduva Meen)", category: "Sea Fish", price: 799, unit: "kg",
+    { id: "sf15", name: "Seabass (Koduva Meen)", desc: "Fat content makes it extra tasty", category: "Sea Fish", price: 799, unit: "kg",
       image: "https://images.pexels.com/photos/20234945/pexels-photo-20234945.jpeg?auto=compress&cs=tinysrgb&w=600" },
-    { id: "sf16", name: "Indian Salmon (Salmon Meen)", category: "Sea Fish", price: 899, unit: "kg",
+    { id: "sf16", name: "Indian Salmon (Salmon Meen)", desc: "Great source of protein", category: "Sea Fish", price: 899, unit: "kg",
       image: "https://images.pexels.com/photos/18072772/pexels-photo-18072772.jpeg?auto=compress&cs=tinysrgb&w=600" },
 
     /* ---------- FRESH WATER FISH ---------- */
-    { id: "fw1", name: "Rohu Catla (Kendai Meen)", category: "Fresh Water Fish", price: 299, unit: "kg",
+    { id: "fw1", name: "Rohu Catla (Kendai Meen)", desc: "Popular freshwater curry fish", category: "Fresh Water Fish", price: 299, unit: "kg",
       image: "https://images.pexels.com/photos/10039794/pexels-photo-10039794.jpeg?auto=compress&cs=tinysrgb&w=600" },
-    { id: "fw2", name: "Ayirai Fish", category: "Fresh Water Fish", price: 3499, unit: "kg",
+    { id: "fw2", name: "Ayirai Fish", desc: "Native freshwater delicacy", category: "Fresh Water Fish", price: 3499, unit: "kg",
       image: "https://images.pexels.com/photos/3650159/pexels-photo-3650159.jpeg?auto=compress&cs=tinysrgb&w=600" },
-    { id: "fw3", name: "Jilebi Fish (Tilapia)", category: "Fresh Water Fish", price: 299, unit: "kg",
+    { id: "fw3", name: "Jilebi Fish (Tilapia)", desc: "Mild, versatile freshwater fish", category: "Fresh Water Fish", price: 299, unit: "kg",
       image: "https://images.pexels.com/photos/8352786/pexels-photo-8352786.jpeg?auto=compress&cs=tinysrgb&w=600" },
-    { id: "fw4", name: "Roopchand Fish", category: "Fresh Water Fish", price: 299, unit: "kg",
+    { id: "fw4", name: "Roopchand Fish", desc: "Omega-3 rich flat fish", category: "Fresh Water Fish", price: 299, unit: "kg",
       image: "https://images.pexels.com/photos/8352009/pexels-photo-8352009.jpeg?auto=compress&cs=tinysrgb&w=600" },
 
     /* ---------- PRAWNS ---------- */
-    { id: "pr1", name: "Freshwater Prawn Medium", category: "Prawns", price: 480, unit: "kg",
+    { id: "pr1", name: "Freshwater Prawn Medium", desc: "Sweet, tender medium prawns", category: "Prawns", price: 480, unit: "kg",
       image: "https://images.pexels.com/photos/2714384/pexels-photo-2714384.jpeg?auto=compress&cs=tinysrgb&w=600" },
-    { id: "pr2", name: "Kal Iral Prawns", category: "Prawns", price: 499, unit: "kg",
+    { id: "pr2", name: "Kal Iral Prawns", desc: "Classic local variety", category: "Prawns", price: 499, unit: "kg",
       image: "https://images.pexels.com/photos/2714384/pexels-photo-2714384.jpeg?auto=compress&cs=tinysrgb&w=600" },
-    { id: "pr3", name: "Sea White Prawn Medium", category: "Prawns", price: 650, unit: "kg",
+    { id: "pr3", name: "Sea White Prawn Medium", desc: "Fresh sea-caught, medium size", category: "Prawns", price: 650, unit: "kg",
       image: "https://images.pexels.com/photos/2714384/pexels-photo-2714384.jpeg?auto=compress&cs=tinysrgb&w=600" },
-    { id: "pr4", name: "White Prawn (Vellai Iral)", category: "Prawns", price: 699, unit: "kg",
+    { id: "pr4", name: "White Prawn (Vellai Iral)", desc: "High levels of Omega-3", category: "Prawns", price: 699, unit: "kg",
       image: "https://images.pexels.com/photos/2714384/pexels-photo-2714384.jpeg?auto=compress&cs=tinysrgb&w=600" },
-    { id: "pr5", name: "Black Tiger Prawn (Puli Iral)", category: "Prawns", price: 699, unit: "kg",
+    { id: "pr5", name: "Black Tiger Prawn (Puli Iral)", desc: "Large, meaty tiger prawns", category: "Prawns", price: 699, unit: "kg",
       image: "https://images.pexels.com/photos/2714384/pexels-photo-2714384.jpeg?auto=compress&cs=tinysrgb&w=600" },
 
     /* ---------- CRABS ---------- */
-    { id: "cr1", name: "Big 3-Spot Crab", category: "Crabs", price: 499, unit: "kg",
+    { id: "cr1", name: "Big 3-Spot Crab", desc: "Medium size, meaty crab", category: "Crabs", price: 499, unit: "kg",
       image: "https://images.pexels.com/photos/3806139/pexels-photo-3806139.jpeg?auto=compress&cs=tinysrgb&w=600" },
-    { id: "cr2", name: "Mud Crab (Kazhi Nandu)", category: "Crabs", price: 899, unit: "kg",
+    { id: "cr2", name: "Mud Crab (Kazhi Nandu)", desc: "Premium mud crab, extra meaty", category: "Crabs", price: 899, unit: "kg",
       image: "https://images.pexels.com/photos/3806139/pexels-photo-3806139.jpeg?auto=compress&cs=tinysrgb&w=600" },
 
     /* ---------- SQUIDS ---------- */
-    { id: "sq1", name: "Squid (Kanava)", category: "Squids", price: 499, unit: "kg",
+    { id: "sq1", name: "Squid (Kanava)", desc: "Rich in protein like any seafood", category: "Squids", price: 499, unit: "kg",
       image: "https://images.pexels.com/photos/30648997/pexels-photo-30648997.jpeg?auto=compress&cs=tinysrgb&w=600" },
 
     /* ---------- SPECIAL MEAT ---------- */
-    { id: "sp1", name: "Rabbit Meat (Muyal Kari)", category: "Special Meat", price: 1199, unit: "kg",
+    { id: "sp1", name: "Rabbit Meat (Muyal Kari)", desc: "Excellent lean, low-fat meat", category: "Special Meat", price: 1199, unit: "kg",
       image: "https://images.pexels.com/photos/24973403/pexels-photo-24973403.jpeg?auto=compress&cs=tinysrgb&w=600" },
-    { id: "sp2", name: "Quail / Kaadai (Pack of 4)", category: "Special Meat", price: 299, unit: "pack",
+    { id: "sp2", name: "Quail / Kaadai (Pack of 4)", desc: "Many health benefits", category: "Special Meat", price: 299, unit: "pack",
       image: "https://images.pexels.com/photos/7140318/pexels-photo-7140318.jpeg?auto=compress&cs=tinysrgb&w=600" },
-    { id: "sp3", name: "Turkey (Vaan Kozhi)", category: "Special Meat", price: 899, unit: "kg",
+    { id: "sp3", name: "Turkey (Vaan Kozhi)", desc: "Lean meat, high in protein", category: "Special Meat", price: 899, unit: "kg",
       image: "https://images.pexels.com/photos/5847715/pexels-photo-5847715.jpeg?auto=compress&cs=tinysrgb&w=600" }
   ];
 
   /* ===================== STATE ===================== */
   let menu = loadMenu();
   let cart = []; // [{id,name,price,unit,qty}]
-  let activeCategory = "all";
+  let currentCategory = null;
 
   function loadMenu(){
     try{
@@ -156,17 +179,22 @@
 
   /* ===================== ELEMENTS ===================== */
   const el = (id) => document.getElementById(id);
-  const itemGrid = el('itemGrid');
+  const catTileGrid = el('catTileGrid');
+  const catHome = el('catHome');
+  const catDetail = el('catDetail');
+  const itemList = el('itemList');
+  const catDetailTitle = el('catDetailTitle');
   const cartLines = el('cartLines');
-  const cartCount = el('cartCount');
+  const cartBadge = el('cartBadge');
   const cartSubtotal = el('cartSubtotal');
   const cartTotal = el('cartTotal');
   const cartPanel = el('cartPanel');
+  const cartOverlay = el('cartOverlay');
   const mobileCartBar = el('mobileCartBar');
   const mobileCartText = el('mobileCartText');
   const toastEl = el('toast');
 
-  /* ===================== VIEW SWITCHING ===================== */
+  /* ===================== VIEW SWITCHING (Billing/Menu/Report) ===================== */
   function showView(name){
     document.querySelectorAll('.view').forEach(v => v.classList.add('hidden'));
     el('view-' + name).classList.remove('hidden');
@@ -188,41 +216,86 @@
     toastTimer = setTimeout(()=> toastEl.classList.remove('show'), 1600);
   }
 
-  /* ===================== CATALOG RENDER ===================== */
-  function renderCatalog(){
-    const items = activeCategory === 'all' ? menu : menu.filter(m => m.category === activeCategory);
-    itemGrid.innerHTML = '';
+  /* ===================== CATEGORY HOME ===================== */
+  function renderCategoryTiles(){
+    catTileGrid.innerHTML = CATEGORIES.map(c=>{
+      const count = menu.filter(m=>m.category===c.key).length;
+      return `
+        <button class="cat-tile" data-cat="${c.key}">
+          <span class="icon">${c.icon}</span>
+          <span class="name">${c.key}</span>
+          <span class="count">${count} item${count!==1?'s':''}</span>
+        </button>
+      `;
+    }).join('');
+  }
+  catTileGrid.addEventListener('click', (e)=>{
+    const tile = e.target.closest('.cat-tile');
+    if(!tile) return;
+    openCategory(tile.dataset.cat);
+  });
+
+  function openCategory(cat){
+    currentCategory = cat;
+    catDetailTitle.textContent = cat;
+    catHome.classList.add('hidden');
+    catDetail.classList.remove('hidden');
+    renderItemList();
+  }
+  el('catBackBtn').addEventListener('click', ()=>{
+    currentCategory = null;
+    catDetail.classList.add('hidden');
+    catHome.classList.remove('hidden');
+    renderCategoryTiles();
+  });
+
+  /* ===================== ITEM LIST (list rows) ===================== */
+  function renderItemList(){
+    const items = menu.filter(m=>m.category===currentCategory);
     if(items.length === 0){
-      itemGrid.innerHTML = '<p class="cart-empty">No items in this category yet. Add some from Manage Menu.</p>';
+      itemList.innerHTML = '<p class="empty-msg">No items in this category yet. Add some from Manage Menu.</p>';
       return;
     }
-    items.forEach(item=>{
-      const inCartQty = cart.find(c=>c.id===item.id);
-      const card = document.createElement('button');
-      card.className = 'item-card';
-      card.type = 'button';
-      card.innerHTML = `
-        <img class="thumb" src="${item.image}" alt="${item.name}" loading="lazy"
-             onerror="this.src='https://images.pexels.com/photos/8352009/pexels-photo-8352009.jpeg?auto=compress&cs=tinysrgb&w=600'">
-        <div class="info">
-          <div class="cat-tag">${item.category}</div>
-          <div class="name">${item.name}</div>
-          <div class="price">${fmt(item.price)} / ${item.unit}</div>
+    itemList.innerHTML = items.map(item=>{
+      const line = cart.find(c=>c.id===item.id);
+      const addControl = line
+        ? `<div class="add-btn in-cart" data-id="${item.id}">
+             <button class="qty-minus" aria-label="Decrease">−</button>
+             <span class="qty-num">${line.qty}</span>
+             <button class="qty-plus" aria-label="Increase">+</button>
+           </div>`
+        : `<button class="add-btn" data-id="${item.id}" aria-label="Add">+</button>`;
+      return `
+        <div class="list-row">
+          <img class="list-thumb" src="${item.image}" alt="${item.name}" loading="lazy"
+               onerror="this.src='${CATEGORY_FALLBACK[item.category] || CATEGORY_FALLBACK['Sea Fish']}'">
+          <div class="list-info">
+            <div class="list-name">${item.name}</div>
+            <div class="list-desc">${item.desc || ''}</div>
+            <div class="list-price">
+              <span class="price-now">${fmt(item.price)} <span style="color:var(--text-faint);font-weight:400;">/${item.unit}</span></span>
+              ${item.originalPrice ? `<span class="price-was">${fmt(item.originalPrice)}</span>` : ''}
+            </div>
+          </div>
+          ${addControl}
         </div>
-        ${inCartQty ? `<div class="add-flag">${inCartQty.qty}</div>` : ''}
       `;
-      card.addEventListener('click', () => addToCart(item));
-      itemGrid.appendChild(card);
-    });
+    }).join('');
   }
 
-  document.getElementById('categoryChips').addEventListener('click', (e)=>{
-    const chip = e.target.closest('.chip');
-    if(!chip) return;
-    document.querySelectorAll('.chip').forEach(c=>c.classList.remove('active'));
-    chip.classList.add('active');
-    activeCategory = chip.dataset.cat;
-    renderCatalog();
+  itemList.addEventListener('click', (e)=>{
+    const plainAdd = e.target.closest('.add-btn:not(.in-cart)');
+    if(plainAdd){
+      const item = menu.find(m=>m.id===plainAdd.dataset.id);
+      if(item) addToCart(item);
+      return;
+    }
+    const stepper = e.target.closest('.add-btn.in-cart');
+    if(stepper){
+      const id = stepper.dataset.id;
+      if(e.target.classList.contains('qty-plus')) changeQty(id, 1);
+      else if(e.target.classList.contains('qty-minus')) changeQty(id, -1);
+    }
   });
 
   /* ===================== CART LOGIC ===================== */
@@ -231,7 +304,7 @@
     if(line){ line.qty += 1; }
     else{ cart.push({ id:item.id, name:item.name, price:item.price, unit:item.unit, qty:1 }); }
     renderCart();
-    renderCatalog();
+    renderItemList();
     showToast(`${item.name} added to bill`);
   }
 
@@ -241,13 +314,13 @@
     line.qty += delta;
     if(line.qty <= 0){ cart = cart.filter(c=>c.id!==id); }
     renderCart();
-    renderCatalog();
+    renderItemList();
   }
 
   function removeLine(id){
     cart = cart.filter(c=>c.id!==id);
     renderCart();
-    renderCatalog();
+    renderItemList();
   }
 
   function cartTotalValue(){
@@ -256,11 +329,17 @@
 
   function renderCart(){
     const totalItems = cart.reduce((s,c)=>s+c.qty,0);
-    cartCount.textContent = `${totalItems} item${totalItems!==1?'s':''}`;
+    if(totalItems > 0){
+      cartBadge.textContent = totalItems;
+      cartBadge.classList.remove('hidden');
+    } else {
+      cartBadge.classList.add('hidden');
+    }
     mobileCartText.textContent = `${totalItems} item${totalItems!==1?'s':''} · ${fmt(cartTotalValue())}`;
+    mobileCartBar.classList.toggle('hidden', totalItems === 0);
 
     if(cart.length === 0){
-      cartLines.innerHTML = '<p class="cart-empty" id="cartEmptyMsg">Tap any catch above to add it to the bill.</p>';
+      cartLines.innerHTML = '<p class="empty-msg">Tap any item to add it to the bill.</p>';
     } else {
       cartLines.innerHTML = cart.map(c => `
         <div class="cart-line" data-id="${c.id}">
@@ -299,20 +378,24 @@
     if(confirm('Clear the entire cart?')){
       cart = [];
       renderCart();
-      renderCatalog();
+      renderItemList();
       showToast('Cart cleared');
     }
   });
 
-  /* mobile cart sheet toggle */
-  mobileCartBar.addEventListener('click', ()=> cartPanel.classList.add('open'));
-  document.addEventListener('click', (e)=>{
-    if(window.innerWidth > 900) return;
-    if(cartPanel.classList.contains('open') &&
-       !cartPanel.contains(e.target) && !mobileCartBar.contains(e.target)){
-      cartPanel.classList.remove('open');
-    }
-  });
+  /* ---- cart drawer open/close ---- */
+  function openCart(){
+    cartPanel.classList.add('open');
+    cartOverlay.classList.remove('hidden');
+  }
+  function closeCart(){
+    cartPanel.classList.remove('open');
+    cartOverlay.classList.add('hidden');
+  }
+  el('cartTriggerBtn').addEventListener('click', openCart);
+  mobileCartBar.addEventListener('click', openCart);
+  el('cartCloseBtn').addEventListener('click', closeCart);
+  cartOverlay.addEventListener('click', closeCart);
 
   /* ===================== PAY NOW / QR ===================== */
   el('payNowBtn').addEventListener('click', ()=>{
@@ -346,8 +429,8 @@
 
     cart = [];
     renderCart();
-    renderCatalog();
-    cartPanel.classList.remove('open');
+    renderItemList();
+    closeCart();
     showToast('Payment recorded. Bill ready!');
   });
 
@@ -359,7 +442,7 @@
     el('receiptContent').innerHTML = `
       <div class="r-head">
         <h2>${SHOP.name}</h2>
-        <p>${SHOP.tagline}</p>
+        <p>${SHOP.location} · ${SHOP.phone}</p>
       </div>
       <div class="r-meta">
         <span>Bill #${order.billNo}</span>
@@ -373,7 +456,7 @@
       `).join('')}
       <div class="r-divider"></div>
       <div class="r-total"><span>TOTAL</span><span>${fmt(order.total)}</span></div>
-      <div class="r-footer">Thank you! Visit again 🌊</div>
+      <div class="r-footer">Thank you! Visit again 🙏</div>
     `;
   }
   el('receiptClose').addEventListener('click', ()=> el('receiptOverlay').classList.add('hidden'));
@@ -389,10 +472,10 @@
     body.innerHTML = menu.map(item => `
       <tr data-id="${item.id}">
         <td><img src="${item.image}" alt="${item.name}"
-             onerror="this.src='https://images.pexels.com/photos/8352009/pexels-photo-8352009.jpeg?auto=compress&cs=tinysrgb&w=200'"></td>
+             onerror="this.src='${CATEGORY_FALLBACK[item.category] || CATEGORY_FALLBACK['Sea Fish']}'"></td>
         <td>${item.name}</td>
         <td><span class="cat-pill">${item.category}</span></td>
-        <td>${fmt(item.price)}</td>
+        <td>${fmt(item.price)}${item.originalPrice ? ` <span style="text-decoration:line-through;color:var(--text-faint);">${fmt(item.originalPrice)}</span>` : ''}</td>
         <td>${item.unit}</td>
         <td>
           <div class="row-actions">
@@ -401,7 +484,7 @@
           </div>
         </td>
       </tr>
-    `).join('') || '<tr><td colspan="6" style="text-align:center;padding:24px;color:var(--ink-soft);">No items yet — add your first one!</td></tr>';
+    `).join('') || '<tr><td colspan="6" style="text-align:center;padding:24px;color:var(--text-muted);">No items yet — add your first one!</td></tr>';
   }
 
   el('manageTableBody').addEventListener('click', (e)=>{
@@ -415,7 +498,8 @@
         menu = menu.filter(m=>m.id!==id);
         saveMenu();
         renderManageTable();
-        renderCatalog();
+        renderCategoryTiles();
+        if(currentCategory) renderItemList();
         showToast('Item deleted');
       }
     }
@@ -427,8 +511,10 @@
     el('itemModalTitle').textContent = item ? 'Edit Item' : 'Add Item';
     el('itemId').value = item ? item.id : '';
     el('itemName').value = item ? item.name : '';
-    el('itemCategory').value = item ? item.category : 'Fish';
+    el('itemDesc').value = item ? (item.desc || '') : '';
+    el('itemCategory').value = item ? item.category : 'Chicken';
     el('itemPrice').value = item ? item.price : '';
+    el('itemOriginalPrice').value = item && item.originalPrice ? item.originalPrice : '';
     el('itemUnit').value = item ? item.unit : 'kg';
     el('itemImage').value = item ? item.image : '';
     updateImgPreview();
@@ -447,34 +533,27 @@
   }
   el('itemImage').addEventListener('input', updateImgPreview);
 
-  const CATEGORY_FALLBACK = {
-    "Chicken": "https://images.pexels.com/photos/13376576/pexels-photo-13376576.jpeg?auto=compress&cs=tinysrgb&w=600",
-    "Mutton": "https://images.pexels.com/photos/26244103/pexels-photo-26244103.jpeg?auto=compress&cs=tinysrgb&w=600",
-    "Sea Fish": "https://images.pexels.com/photos/8352009/pexels-photo-8352009.jpeg?auto=compress&cs=tinysrgb&w=600",
-    "Fresh Water Fish": "https://images.pexels.com/photos/8352786/pexels-photo-8352786.jpeg?auto=compress&cs=tinysrgb&w=600",
-    "Crabs": "https://images.pexels.com/photos/3806139/pexels-photo-3806139.jpeg?auto=compress&cs=tinysrgb&w=600",
-    "Prawns": "https://images.pexels.com/photos/2714384/pexels-photo-2714384.jpeg?auto=compress&cs=tinysrgb&w=600",
-    "Squids": "https://images.pexels.com/photos/30648997/pexels-photo-30648997.jpeg?auto=compress&cs=tinysrgb&w=600",
-    "Special Meat": "https://images.pexels.com/photos/5847715/pexels-photo-5847715.jpeg?auto=compress&cs=tinysrgb&w=600"
-  };
-
   itemForm.addEventListener('submit', (e)=>{
     e.preventDefault();
     const id = el('itemId').value || uid();
     const category = el('itemCategory').value;
+    const origPriceVal = parseFloat(el('itemOriginalPrice').value);
     const data = {
       id,
       name: el('itemName').value.trim(),
+      desc: el('itemDesc').value.trim(),
       category,
       price: parseFloat(el('itemPrice').value) || 0,
       unit: el('itemUnit').value,
       image: el('itemImage').value.trim() || CATEGORY_FALLBACK[category]
     };
+    if(!isNaN(origPriceVal) && origPriceVal > data.price) data.originalPrice = origPriceVal;
     const idx = menu.findIndex(m=>m.id===id);
     if(idx > -1) menu[idx] = data; else menu.push(data);
     saveMenu();
     renderManageTable();
-    renderCatalog();
+    renderCategoryTiles();
+    if(currentCategory) renderItemList();
     closeItemModal();
     showToast(idx > -1 ? 'Item updated' : 'Item added');
   });
@@ -486,7 +565,8 @@
       menu = menu.filter(m=>m.id!==id);
       saveMenu();
       renderManageTable();
-      renderCatalog();
+      renderCategoryTiles();
+      if(currentCategory) renderItemList();
       closeItemModal();
       showToast('Item deleted');
     }
@@ -512,7 +592,6 @@
     const orderCount = orders.length;
     const avg = orderCount ? totalSales / orderCount : 0;
 
-    // top seller
     const itemTotals = {};
     orders.forEach(o => o.items.forEach(it=>{
       itemTotals[it.name] = (itemTotals[it.name]||0) + it.qty;
@@ -525,7 +604,6 @@
     el('statAvg').textContent = fmt(avg);
     el('statTop').textContent = topItem;
 
-    // daily chart
     const daysInMonth = new Date(year, month, 0).getDate();
     const dailyTotals = new Array(daysInMonth+1).fill(0);
     orders.forEach(o=>{
@@ -544,7 +622,6 @@
       chart.appendChild(col);
     }
 
-    // orders table
     const body = el('ordersTableBody');
     const emptyMsg = el('ordersEmptyMsg');
     if(orders.length === 0){
@@ -562,7 +639,7 @@
   }
 
   /* ===================== INIT ===================== */
-  renderCatalog();
+  renderCategoryTiles();
   renderCart();
   showView('billing');
 })();

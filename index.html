@@ -6,7 +6,7 @@
 <title>Chennai Fresh Catch · Billing</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,500&family=Work+Sans:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -14,77 +14,69 @@
 <!-- ============ TOP HEADER ============ -->
 <header class="topbar">
   <div class="brand">
-    <svg class="brand-mark" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-      <path d="M4 28c6-10 14-15 20-15s10 3 10 3-3 6-10 9c6 1 12 5 14 9 0 0-8 4-18 2C12 34 6 32 4 28Z" fill="var(--seafoam)"/>
-      <circle cx="30" cy="20" r="2.2" fill="var(--ocean-deep)"/>
-      <path d="M2 30c2-1 4-1 6 0" stroke="var(--ocean-deep)" stroke-width="1.6" stroke-linecap="round"/>
-    </svg>
+    <div class="brand-mark">🥩</div>
     <div class="brand-text">
       <h1>Chennai Fresh Catch</h1>
-      <p>Fresh meat &amp; seafood, weighed &amp; billed here</p>
+      <p class="brand-meta">
+        <span>📍 Saidapet Market</span>
+        <a href="tel:9445823174">📞 94458 23174</a>
+      </p>
     </div>
   </div>
   <nav class="tabs" id="topTabs">
-    <button class="tab-btn active" data-view="billing">
-      <svg viewBox="0 0 24 24"><path d="M3 6h18M3 12h18M3 18h12" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
-      Billing
-    </button>
-    <button class="tab-btn" data-view="menu">
-      <svg viewBox="0 0 24 24"><path d="M4 4h16v16H4z" stroke="currentColor" stroke-width="1.6"/><path d="M4 9h16M9 9v11" stroke="currentColor" stroke-width="1.6"/></svg>
-      Manage Menu
-    </button>
-    <button class="tab-btn" data-view="report">
-      <svg viewBox="0 0 24 24"><path d="M5 19V9M12 19V5M19 19v-6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
-      Sales Report
-    </button>
+    <button class="tab-btn active" data-view="billing">Billing</button>
+    <button class="tab-btn" data-view="menu">Manage Menu</button>
+    <button class="tab-btn" data-view="report">Sales Report</button>
   </nav>
 </header>
-
-<svg class="wave-divider" viewBox="0 0 1200 24" preserveAspectRatio="none" aria-hidden="true">
-  <path d="M0 12 Q 50 0 100 12 T 200 12 T 300 12 T 400 12 T 500 12 T 600 12 T 700 12 T 800 12 T 900 12 T 1000 12 T 1100 12 T 1200 12 V24 H0 Z" fill="var(--ocean-deep)"/>
-</svg>
 
 <main id="app">
 
   <!-- ============ BILLING VIEW ============ -->
   <section class="view" id="view-billing">
-    <div class="billing-layout">
-      <div class="catalog">
-        <div class="chip-row" id="categoryChips">
-          <button class="chip active" data-cat="all">All</button>
-          <button class="chip" data-cat="Chicken">🐔 Chicken</button>
-          <button class="chip" data-cat="Mutton">🐐 Mutton</button>
-          <button class="chip" data-cat="Sea Fish">🐟 Sea Fish</button>
-          <button class="chip" data-cat="Fresh Water Fish">🐠 Fresh Water Fish</button>
-          <button class="chip" data-cat="Prawns">🦐 Prawns</button>
-          <button class="chip" data-cat="Crabs">🦀 Crabs</button>
-          <button class="chip" data-cat="Squids">🦑 Squids</button>
-          <button class="chip" data-cat="Special Meat">🍗 Special Meat</button>
-        </div>
-        <div class="item-grid" id="itemGrid"><!-- items injected --></div>
-      </div>
 
-      <aside class="cart-panel" id="cartPanel">
-        <div class="cart-head">
-          <h2>Current Bill</h2>
-          <span class="cart-count" id="cartCount">0 items</span>
-        </div>
-        <div class="cart-lines" id="cartLines">
-          <p class="cart-empty" id="cartEmptyMsg">Tap any catch above to add it to the bill.</p>
-        </div>
-        <div class="cart-totals">
-          <div class="row"><span>Subtotal</span><span id="cartSubtotal">₹0.00</span></div>
-          <div class="row grand"><span>Total</span><span id="cartTotal">₹0.00</span></div>
-        </div>
-        <div class="cart-actions">
-          <button class="btn btn-ghost" id="clearCartBtn">Clear Cart</button>
-          <button class="btn btn-primary" id="payNowBtn">Pay Now</button>
-        </div>
-      </aside>
+    <!-- ---- category home (tile grid) ---- -->
+    <div class="cat-home" id="catHome">
+      <div class="cat-tile-grid" id="catTileGrid"><!-- injected --></div>
     </div>
 
+    <!-- ---- category detail (list rows) ---- -->
+    <div class="cat-detail hidden" id="catDetail">
+      <div class="cat-detail-head">
+        <button class="round-btn" id="catBackBtn" aria-label="Back">
+          <svg viewBox="0 0 24 24"><path d="M15 18l-6-6 6-6" stroke="currentColor" stroke-width="2.2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+        <h2 id="catDetailTitle">Category</h2>
+        <button class="round-btn cart-trigger" id="cartTriggerBtn" aria-label="Cart">
+          <svg viewBox="0 0 24 24"><path d="M3 4h2l2.4 12.2a2 2 0 0 0 2 1.6h7.4a2 2 0 0 0 2-1.6L21 8H6" stroke="currentColor" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-linejoin="round"/><circle cx="10" cy="21" r="1.4" fill="currentColor"/><circle cx="18" cy="21" r="1.4" fill="currentColor"/></svg>
+          <span class="cart-badge hidden" id="cartBadge">0</span>
+        </button>
+      </div>
+      <div class="item-list" id="itemList"><!-- injected --></div>
+    </div>
+
+    <!-- ---- cart drawer ---- -->
+    <div class="cart-overlay hidden" id="cartOverlay"></div>
+    <aside class="cart-panel" id="cartPanel">
+      <div class="cart-head">
+        <h2>Current Bill</h2>
+        <button class="round-btn small" id="cartCloseBtn" aria-label="Close">✕</button>
+      </div>
+      <div class="cart-lines" id="cartLines">
+        <p class="empty-msg" id="cartEmptyMsg">Tap any item to add it to the bill.</p>
+      </div>
+      <div class="cart-totals">
+        <div class="row"><span>Subtotal</span><span id="cartSubtotal">₹0.00</span></div>
+        <div class="row grand"><span>Total</span><span id="cartTotal">₹0.00</span></div>
+      </div>
+      <div class="cart-actions">
+        <button class="btn btn-ghost" id="clearCartBtn">Clear Cart</button>
+        <button class="btn btn-primary" id="payNowBtn">Pay Now</button>
+      </div>
+    </aside>
+
     <!-- mobile floating cart bar -->
-    <button class="mobile-cart-bar" id="mobileCartBar">
+    <button class="mobile-cart-bar hidden" id="mobileCartBar">
       <span id="mobileCartText">0 items · ₹0.00</span>
       <span class="mobile-cart-cta">View Bill →</span>
     </button>
@@ -95,7 +87,7 @@
     <div class="menu-head">
       <div>
         <h2>Manage Menu</h2>
-        <p class="muted">Add, edit or retire items from the catch of the day.</p>
+        <p class="muted">Add, edit or retire items from the counter.</p>
       </div>
       <button class="btn btn-primary" id="addItemBtn">+ Add Item</button>
     </div>
@@ -114,7 +106,7 @@
     <div class="report-head">
       <div>
         <h2>Monthly Sales Report</h2>
-        <p class="muted">Catch counted, cash tallied.</p>
+        <p class="muted">Everything sold, everything tallied.</p>
       </div>
       <input type="month" id="reportMonth">
     </div>
@@ -148,7 +140,7 @@
         <thead><tr><th>Date</th><th>Bill No.</th><th>Items</th><th>Total</th></tr></thead>
         <tbody id="ordersTableBody"></tbody>
       </table>
-      <p class="cart-empty" id="ordersEmptyMsg" style="display:none;">No sales recorded for this month yet.</p>
+      <p class="empty-msg" id="ordersEmptyMsg" style="display:none;">No sales recorded for this month yet.</p>
     </div>
   </section>
 
@@ -175,12 +167,15 @@
   <div class="modal">
     <div class="modal-head">
       <h3 id="itemModalTitle">Add Item</h3>
-      <button class="icon-btn" id="itemModalClose">✕</button>
+      <button class="round-btn small" id="itemModalClose">✕</button>
     </div>
     <form id="itemForm">
       <input type="hidden" id="itemId">
       <label>Item Name
         <input type="text" id="itemName" placeholder="e.g. Pomfret" required>
+      </label>
+      <label>Short Description
+        <input type="text" id="itemDesc" placeholder="e.g. Rich in Omega-3 fatty acids">
       </label>
       <label>Category
         <select id="itemCategory" required>
@@ -198,17 +193,20 @@
         <label>Price (₹)
           <input type="number" id="itemPrice" min="0" step="1" placeholder="450" required>
         </label>
-        <label>Unit
-          <select id="itemUnit">
-            <option value="kg">per kg</option>
-            <option value="500g">per 500g</option>
-            <option value="250g">per 250g</option>
-            <option value="piece">per piece</option>
-            <option value="pack">per pack</option>
-            <option value="plate">per plate</option>
-          </select>
+        <label>Original Price (₹, optional)
+          <input type="number" id="itemOriginalPrice" min="0" step="1" placeholder="for strike-through">
         </label>
       </div>
+      <label>Unit
+        <select id="itemUnit">
+          <option value="kg">per kg</option>
+          <option value="500g">per 500g</option>
+          <option value="250g">per 250g</option>
+          <option value="piece">per piece</option>
+          <option value="pack">per pack</option>
+          <option value="plate">per plate</option>
+        </select>
+      </label>
       <label>Image URL
         <input type="url" id="itemImage" placeholder="https://...">
       </label>
@@ -226,7 +224,7 @@
   <div class="modal modal-pay">
     <div class="modal-head">
       <h3>Pay Now</h3>
-      <button class="icon-btn" id="payModalClose">✕</button>
+      <button class="round-btn small" id="payModalClose">✕</button>
     </div>
     <div class="pay-body">
       <p class="pay-amount-label">Amount Due</p>
@@ -234,7 +232,7 @@
       <div class="qr-wrap">
         <img id="qrImage" alt="Scan to pay QR code">
       </div>
-      <p class="qr-hint">Scan with any UPI app to pay Oma Kadal Itam. Replace the UPI ID in script.js with the shop's real one before going live.</p>
+      <p class="qr-hint">Scan with any UPI app to pay Chennai Fresh Catch. Replace the UPI ID in script.js with the shop's real one before going live.</p>
       <div class="pay-actions">
         <button class="btn btn-ghost" id="cancelPayBtn">Cancel</button>
         <button class="btn btn-primary" id="confirmPayBtn">Payment Received</button>
@@ -248,7 +246,7 @@
   <div class="modal modal-receipt">
     <div class="modal-head no-print">
       <h3>Bill Ready</h3>
-      <button class="icon-btn" id="receiptClose">✕</button>
+      <button class="round-btn small" id="receiptClose">✕</button>
     </div>
     <div id="receiptContent" class="receipt">
       <!-- injected -->
